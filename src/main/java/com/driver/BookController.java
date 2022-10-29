@@ -111,13 +111,12 @@ public class BookController {
     @GetMapping("/get-books-by-author")
     public ResponseEntity<Book> getBooksByAuthor(@RequestParam("author") String author){
         int n = bookList.size();
-        Book book = null;
         for(int i = 0 ; i < n ; i++){
             if(bookList.get(i).getAuthor().equals(author)){
-                book = bookList.get(i);
+                return new ResponseEntity<>(bookList.get(i),HttpStatus.FOUND);
             }
         }
-        return new ResponseEntity<>(book,HttpStatus.FOUND);
+        return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
     }
 
     // get request /get-books-by-genre
@@ -128,12 +127,11 @@ public class BookController {
     @GetMapping("/get-books-by-genre")
     public ResponseEntity<Book> getBooksByGenre(@RequestParam("Genre") String genre){
         int n = bookList.size();
-        Book book = null;
         for(int i = 0 ; i < n ; i++){
             if(bookList.get(i).getGenre().equals(genre)){
-                book = bookList.get(i);
+                return new ResponseEntity<>(bookList.get(i),HttpStatus.FOUND);
             }
         }
-        return new ResponseEntity<>(book,HttpStatus.FOUND);
+        return new ResponseEntity<>(null,HttpStatus.NO_CONTENT);
     }
 }
